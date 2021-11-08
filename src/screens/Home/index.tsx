@@ -1,7 +1,11 @@
 import React from 'react';
 import {SafeAreaView,Image,View, ColorPropType} from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import { FAB,Card, List, IconButton, Button, ActivityIndicator ,Title} from 'react-native-paper';
+import { FAB} from 'react-native-paper';
+import {DeliveryCard} from '../../components/DeliveryCard';
+import {PesquisaDelivery} from '../../components/PesquisaDelivery';
+import Header from '../../components/Header';
+
 
 
 import {styles} from './styles';
@@ -12,10 +16,11 @@ const LOGITUDE_DELTA:number = 0.04;
 
 export const Home:React.FC = () => {
 
-    const state:number = 2
+    const state:number = 3
 
     return (
         <SafeAreaView style={styles.flex}>
+            <Header title="Delivery App" />
             <MapView
                 style={styles.flex}
                 initialRegion={{
@@ -72,26 +77,8 @@ export const Home:React.FC = () => {
             </MapView>
 
             {
-                    state === 2 ?
-                    <Card>
-                        <Card.Content>
-                            <List.Item
-                                title="$ 15.00"
-                                description="Total Price of Delivery"
-                                left={() => <IconButton  
-                                                icon="bike" 
-                                                size={30}
-                                                style={styles.icon} 
-                                                color={styles.icon.color} />} 
-                                right={() => 
-                                    <View>
-                                        <Button style={styles.cancelButton}>Cancelar</Button>
-                                        <Button mode="contained">Confirmar</Button>
-                                    </View>    
-                                }
-                            />
-                        </Card.Content>
-                    </Card>
+                state === 2 ?
+                  <DeliveryCard />
                 :
                   null
                 }
@@ -104,13 +91,7 @@ export const Home:React.FC = () => {
                 }
                 {
                     state === 3?
-                        <View style={styles.flexcentercolumn}>
-                            <ActivityIndicator
-                               color={styles.icon.color} 
-                               animating={true} />
-                            <Title style={styles.title}>Searching for a delivery person in your region</Title>
-                            <Button style={styles.cancelDelivertButton} mode="contained">Cancel</Button>
-                        </View>
+                    <PesquisaDelivery />
                     :
                       null
                 }

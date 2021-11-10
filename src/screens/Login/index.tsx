@@ -1,10 +1,18 @@
 import React from 'react';
-import { SafeAreaView,View } from 'react-native';
+import { Alert, SafeAreaView,View } from 'react-native';
 import {Card,TextInput,Button} from 'react-native-paper';
 
 import {styles} from './styles';
 
-const Login:React.FC  = () => {
+interface LoginProps {
+    navigation:any
+}
+
+export const Login:React.FC<LoginProps>  = (props:LoginProps) => {
+
+    const login = () => props.navigation.navigate("Home");
+    const register = () => props.navigation.navigate("Register");
+
     return (
         <SafeAreaView style={styles.content}>
             <View style={styles.view}>
@@ -14,8 +22,8 @@ const Login:React.FC  = () => {
                         <TextInput label="Email" keyboardType="email-address"></TextInput>
                         <TextInput label="Password" secureTextEntry={true}></TextInput>
                         <Button style={styles.cardButton} uppercase={false}>Forgot email/password</Button>
-                        <Button style={styles.cardButton}mode="contained">Login</Button>
-                        <Button style={styles.cardButton}>Register</Button>
+                        <Button style={styles.cardButton} mode="contained" onPress={login}>Login</Button>
+                        <Button style={styles.cardButton} onPress={register} >Register</Button>
                     </Card.Content>
                 </Card>
             </View>
@@ -23,4 +31,3 @@ const Login:React.FC  = () => {
     );
 }
 
-export default Login;

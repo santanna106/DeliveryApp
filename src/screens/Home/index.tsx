@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView,Image,View, ColorPropType} from 'react-native';
+import {SafeAreaView,Image,View, ColorPropType, Alert} from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { FAB} from 'react-native-paper';
 import {DeliveryCard} from '../../components/DeliveryCard';
@@ -14,13 +14,20 @@ import {styles} from './styles';
 const LATITUDE_DELTA:number = 0.09;
 const LOGITUDE_DELTA:number = 0.04; 
 
-export const Home:React.FC = () => {
+interface HomeProps{
+    navigation:any
+}
 
-    const state:number = 3
+export const Home:React.FC<HomeProps> = (props:HomeProps) => {
+
+    const goToDeliveryRoute = () => props.navigation.navigate("AddAddres")
+      
+
+    const state:number = 1
 
     return (
         <SafeAreaView style={styles.flex}>
-            <Header title="Delivery App" />
+            <Header title="Delivery App" navigation={props.navigation} />
             <MapView
                 style={styles.flex}
                 initialRegion={{
@@ -73,8 +80,21 @@ export const Home:React.FC = () => {
                     :
                         null
                 }
+
+               
               
             </MapView>
+
+            {
+                    state === 1 ?
+                        <FAB icon="plus" style={styles.fab}
+                        onPress={goToDeliveryRoute}
+                        >
+                            
+                        </FAB>
+                    :
+                      null
+                }
 
             {
                 state === 2 ?
@@ -83,18 +103,17 @@ export const Home:React.FC = () => {
                   null
                 }
 
-                {
-                    state === 1 ?
-                        <FAB icon="plus" style={styles.fab}/>
-                    :
-                      null
-                }
+                
+
+               
                 {
                     state === 3?
                     <PesquisaDelivery />
                     :
                       null
                 }
+
+
                 
             
         </SafeAreaView>

@@ -1,12 +1,18 @@
 import React from 'react';
 import { SafeAreaView,ScrollView,View } from 'react-native';
-import {Appbar,TextInput,Button} from 'react-native-paper';
-
+import {TextInput,Button,Card} from 'react-native-paper';
 import Header from '../../components/Header'
-
 import {styles} from './styles';
 
-const Register:React.FC  = () => {
+
+interface RegisterProps {
+    navigation:any
+}
+
+export const Register:React.FC<RegisterProps> = (props:RegisterProps) => {
+
+    const registro = () => props.navigation.navigate("Home");
+
     return (
         <SafeAreaView>
             <ScrollView>
@@ -25,11 +31,17 @@ const Register:React.FC  = () => {
                       right={<TextInput.Icon name="eye-off-outline" color={styles.icon.color} />}
                     />
                     <TextInput label="Phone Number" keyboardType="phone-pad" />
-                    <Button mode="contained" style={styles.button}>Register</Button>
+                    <Card.Content>
+                        <Button mode="contained" 
+                                style={styles.button} 
+                                onPress={registro}
+                            >
+                            Register
+                        </Button>
+                    </Card.Content>
                 </View>
             </ScrollView>
         </SafeAreaView>
     );
 }
 
-export default Register;

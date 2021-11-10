@@ -8,11 +8,18 @@ import { styles } from './styles';
 const LATITUDE_DELTA:number = 0.09;
 const LOGITUDE_DELTA:number = 0.04; 
 
-export const Delivery = () => {
+interface DeliveryProps{
+    navigation:any;
+}
+
+export const Delivery:React.FC<DeliveryProps> = (props:DeliveryProps) => {
     
     return(
         <SafeAreaView style={styles.flex}>
-            <Header title="Delivery Details" hasBackButton={true}/>
+            <Header title="Delivery Details" 
+                    hasBackButton={true}
+                    navigation={props.navigation}
+            />
             <View style={styles.flex}>
                 <MapView
                     style={styles.flex}

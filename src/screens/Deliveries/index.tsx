@@ -4,16 +4,21 @@ import { Card, Text } from 'react-native-paper';
 import Header from '../../components/Header';
 import { styles } from './styles';
 
-export const Deliveries = () => {
+interface DeliveriesProps{
+    navigation:any;
+}
+
+export const Deliveries:React.FC<DeliveriesProps> = (props:DeliveriesProps) => {
     const deliveries:number[] = [1,2,3]
+    const goToDeliveryDetails = () => props.navigation.navigate("Delivery");
     return (
         <SafeAreaView>
-            <Header title={"My Deliveries"} hasBackButton={true} />
+            <Header title={"My Deliveries"} hasBackButton={true} navigation={props.navigation} />
             <FlatList
                 data={deliveries}
                 keyExtractor={(item,index) =>  `deliveries${index}`}
                 renderItem={({item,index}) => 
-                    <Card style={{...styles.card,...styles.cardStatus}}>
+                    <Card style={{...styles.card,...styles.cardStatus}} onPress={goToDeliveryDetails}>
                         <Card.Cover
                                 source={{uri: "https://snazzy-maps-cdn.azureedge.net/assets/74-becomeadinosaur.png?v=20170626082939"}}
                         />

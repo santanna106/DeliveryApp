@@ -20,7 +20,7 @@ interface HomeProps{
 
 export const Home:React.FC<HomeProps> = (props:HomeProps) => {
 
-    const goToDeliveryRoute = () => props.navigation.navigate("AddAddres")
+    const goToDeliveryRoute = () => props.navigation.navigate("Details")
       
 
     const state:number = 1

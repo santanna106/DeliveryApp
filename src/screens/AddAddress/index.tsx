@@ -6,13 +6,20 @@ import Header from '../../components/Header';
 import {styles} from './styles';
 
 
-export const AddAddres = () => {
+interface AddAddresProps {
+    navigation?:any;
+}
+
+
+export const AddAddres:React.FC<AddAddresProps> = (props:AddAddresProps) => {
 
     const destinations:number[] = [1,2] ;
 
+    const goToHome = () => props.navigation?.navigate("Home");
+
     return (
         <SafeAreaView>
-            <Header title="Address" hasBackButton={true} />
+            <Header title="Address" hasBackButton={true} navigation={props.navigation} />
             <View style={styles.marginHorizontal}>
                 <TextInput label="Origin" />
                 {
@@ -37,7 +44,11 @@ export const AddAddres = () => {
             <View style={styles.buttonIconAdd}>
                 <Button icon="plus" labelStyle={styles.buttonAddLabel}></Button>
             </View>
-            <Button mode="contained" uppercase={false} style={styles.readyButton} labelStyle={styles.readyButtonLabel}>
+            <Button mode="contained"
+                    uppercase={false} 
+                    style={styles.readyButton}
+                    labelStyle={styles.readyButtonLabel}
+                    onPress={goToHome}>
                 Ready
             </Button>
         </SafeAreaView>
